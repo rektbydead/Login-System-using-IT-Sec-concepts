@@ -1,7 +1,6 @@
 module.exports = {
     // input checker constants
     PASSWORD_LENGTH: 8,
-
     EMAIL_MATCH: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     ONLY_LETTERS_MATCH: /^[A-Za-z]+$/,
     ONLY_LETTERS_NUMBERS_MATCH: /^[^a-zA-Z0-9]+$/,
@@ -24,4 +23,9 @@ module.exports = {
 
     // success constants
     USER_ADD_SUCCESS: "User added successfully",
+
+    // encrypto constants
+    ITERATIONS: 1000,
+    LENGTH: 64,
+    ALGORITHM: 'sha512'
 }
