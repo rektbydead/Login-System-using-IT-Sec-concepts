@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-const { resourceLimits } = require('worker_threads');
 
 const DATABASE_NAME = "login_register";
 const TABLE_NAME = "users";
@@ -51,7 +50,24 @@ const getLoginInformation = (email) => {
             ],
             function (err, res) {
                 if (err) reject(err);
-                console.log(res);
+                
+                return resolve(res[0]);
+            }
+        );
+    });
+}
+
+const getUserInformation = (email) => {
+    const userExistsStatement = `Select ${NAME} from ${TABLE_NAME} where ${EMAIL}=?`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(userExistsStatement, 
+            [
+                email,
+            ],
+            function (err, res) {
+                if (err) reject(err);
+                
                 return resolve(res[0]);
             }
         );
@@ -84,6 +100,7 @@ module.exports = {
     removeUser,
     changeUserPassword,
     getLoginInformation,
+    getUserInformation,
     SALT_MIN_SIZE,
     SALT_MAX_SIZE
 };
