@@ -22,16 +22,10 @@ router.post('/', async (req, res) => {
     if (!password) return res.status(400).send(constants.PASSWORD_IS_MISSING);
 
     if (!inputChecker.checkEmail(email)) return res.status(400).send(constants.EMAIL_IS_NOT_VALID);
+    if (await sql.checkUserExists(email)) return res.status(400).send(constants.EMAIL_ALREADY_EXITS);
 
     let passwordCheck = inputChecker.checkPassword(password, username);
     if (passwordCheck) return res.status(400).send(passwordCheck);
-
-    let userExists = await sql.checkUserExists(email);
-
-    if (userExists == true) {
-        res.status(400).send(constants.EMAIL_ALREADY_EXITS);
-        return;
-    }
 
     let salt = encrypt.createSalt();
     let hashedPassword = encrypt.hashPassword(password, salt);
