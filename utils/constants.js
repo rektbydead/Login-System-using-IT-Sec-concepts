@@ -3,7 +3,8 @@ module.exports = {
     PASSWORD_LENGTH: 8,
 
     EMAIL_MATCH: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-
+    ONLY_LETTERS_MATCH: /^[A-Za-z]+$/,
+    ONLY_LETTERS_NUMBERS_MATCH: /^[^a-zA-Z0-9]+$/,
 
     // error constants
     PASSWORD_IS_MISSING: "Password is missing",
@@ -12,6 +13,7 @@ module.exports = {
 
     PASSWORD_TOO_SMALL: "Password has less than 8 characters",
     PASSWORD_HAS_NO_DIGIT: "Password has to have at least one digit",
+    PASSWORD_HAS_NO_SPECIAL_DIGIT: "Password has to have at least one special digit",
     PASSWORD_CONTAINS_USERNAME: "Password cannot contain username",
 
     EMAIL_IS_NOT_VALID: "Email is invalid",
