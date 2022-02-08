@@ -41,6 +41,23 @@ const checkUserExists = (email) => {
     });
 };
 
+const getLoginInformation = (email) => {
+    const userExistsStatement = `Select ${PASSWORD}, ${SALT} from ${TABLE_NAME} where ${EMAIL}=?`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(userExistsStatement, 
+            [
+                email,
+            ],
+            function (err, res) {
+                if (err) reject(err);
+                console.log(res);
+                return resolve(res[0]);
+            }
+        );
+    });
+}
+
 const addUser = (username, email, password, salt) => {
     const addUserStatement = `INSERT INTO ${TABLE_NAME} VALUES (?, ?, ?, ?)`;
 
@@ -66,6 +83,7 @@ module.exports = {
     addUser,
     removeUser,
     changeUserPassword,
+    getLoginInformation,
     SALT_MIN_SIZE,
     SALT_MAX_SIZE
 };
