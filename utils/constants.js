@@ -6,6 +6,7 @@ module.exports = {
     ONLY_LETTERS_MATCH: /^[A-Za-z]+$/,
     ONLY_LETTERS_NUMBERS_MATCH: /^[^a-zA-Z0-9]+$/,
 
+    
     // error constants
     PASSWORD_IS_MISSING: "Password is missing",
     EMAIL_IS_MISSING: "Email is missing",
@@ -18,6 +19,8 @@ module.exports = {
 
     EMAIL_IS_NOT_VALID: "Email is invalid",
     EMAIL_ALREADY_EXITS: "User already exits",
+
+    EMAIL_PASSWORD_NOT_CORRECT: "Email or password is not correct",
 
     // success constants
     USER_ADD_SUCCESS: "User added successfully",
