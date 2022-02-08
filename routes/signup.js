@@ -20,6 +20,7 @@ router.post('/', async (req, res) => {
 
     let userExists = await sql.checkUserExists(body.email);
     if (userExists._results.length != 0) {
+        res.status(400).send({ err: "User already exits."})
         return;
     }
 
