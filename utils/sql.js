@@ -27,11 +27,18 @@ const createDatabase = () => {
 const checkUserExists = (email) => {
     const userExistsStatement = `Select ${EMAIL} from ${TABLE_NAME} where ${EMAIL}=?`;
 
-    return  connection.query(userExistsStatement, 
-        [
-            email
-        ], 
-    );
+    return new Promise((resolve, reject) => {
+        connection.query(userExistsStatement, 
+            [
+                email
+            ], 
+            (err, result) => {
+                if (err) reject(err);
+
+                return resolve(result.length != 0);
+            }
+        );
+    });
 };
 
 const addUser = (username, email, password, salt) => {

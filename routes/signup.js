@@ -1,4 +1,4 @@
-const encrypt = require('../encrypt');
+const encrypt = require('../utils/encrypt');
 const express = require('express');
 const sql = require('../utils/sql');
 
@@ -19,14 +19,14 @@ router.post('/', async (req, res) => {
     let hashedPassword = encrypt.hashPassword(body.password, salt);
 
     let userExists = await sql.checkUserExists(body.email);
-    if (userExists._results.length != 0) {
+
+    if (userExists == true) {
         res.status(400).send({ err: "User already exits."})
         return;
     }
 
-    await sql.addUser(body.username, body.email, hashedPassword, salt);
-
-    res.send(hashedPassword);
+    sql.addUser(body.username, body.email, hashedPassword, salt);
+    res.status(200).send({ err: "Add successfully."});
 });
 
 module.exports = router;
