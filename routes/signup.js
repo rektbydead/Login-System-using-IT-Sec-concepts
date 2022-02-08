@@ -1,6 +1,8 @@
 const encrypt = require('../utils/encrypt');
 const express = require('express');
 const sql = require('../utils/sql');
+const constants = require('../utils/constants');
+const inputChecker = require('../utils/input_checker');
 
 const router = express.Router();
 
@@ -11,22 +13,32 @@ router.post('/', async (req, res) => {
         return res.send("Empty body");   
     }
 
-    if (!body.username) return res.status(400).send("Username is missing");
-    if (!body.email) return res.status(400).send("Email is missing");
-    if (!body.password) return res.status(400).send("Password is missing");
+    let username = body.username;
+    let email = body.email ? String(body.email).toLowerCase() : undefined;
+    let password = body.password;
 
-    let salt = encrypt.createSalt();
-    let hashedPassword = encrypt.hashPassword(body.password, salt);
+    if (!username) return res.status(400).send(constants.USERNAME_IS_MISSING);
+    if (!email) return res.status(400).send(constants.EMAIL_IS_MISSING);
+    if (!password) return res.status(400).send(constants.PASSWORD_IS_MISSING);
 
-    let userExists = await sql.checkUserExists(body.email);
+    if (!inputChecker.checkEmail(email)) return res.status(400).send(constants.EMAIL_IS_NOT_VALID);
+
+    let passwordCheck = inputChecker.checkPassword(password, username);
+    if (passwordCheck) return res.status(400).send(passwordCheck);
+
+    let userExists = await sql.checkUserExists(email);
 
     if (userExists == true) {
-        res.status(400).send({ err: "User already exits."})
+        res.status(400).send(constants.EMAIL_ALREADY_EXITS);
         return;
     }
 
-    sql.addUser(body.username, body.email, hashedPassword, salt);
-    res.status(200).send({ err: "Add successfully."});
+    let salt = encrypt.createSalt();
+    let hashedPassword = encrypt.hashPassword(password, salt);
+
+    sql.addUser(username, email, hashedPassword, salt);
+
+    res.status(200).send(constants.USER_ADD_SUCCESS);
 });
 
 module.exports = router;

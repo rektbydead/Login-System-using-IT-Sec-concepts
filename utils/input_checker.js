@@ -1,14 +1,16 @@
-function checkPassword(password) {
+const constants = require('./constants');
 
-    return true;
+function checkPassword(password, username) {
+    if (password.length < constants.PASSWORD_LENGTH) return constants.PASSWORD_TOO_SMALL;
+
+    if (password.includes(username)) return constants.PASSWORD_CONTAINS_USERNAME;
 }
 
 function checkEmail(email) {
-    return true;
+    return String(email).toLowerCase().match(constants.EMAIL_MATCH);
 }
 
 module.exports = {
     checkPassword,
     checkEmail,
-    
 }
