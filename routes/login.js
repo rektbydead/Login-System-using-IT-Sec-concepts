@@ -1,5 +1,6 @@
 const express = require('express');
 const sql = require('../utils/sql');
+const encrypt = require('../utils/encrypt');
 const constants = require('../utils/constants');
 
 const router = express.Router();
@@ -16,8 +17,10 @@ router.get('/', async function(req, res) {
     let result = await sql.getLoginInformation(email);
     if (!result) return res.send(constants.EMAIL_PASSWORD_NOT_CORRECT);
 
-    console.log(result);
+    if (!encrypt.verifyPassword(result.password, password, result.salt)) return res.send(constants.EMAIL_PASSWORD_NOT_CORRECT);
     
+    let userInformation = await sql.getUserInformation(email);
+    return res.status(200).send(userInformation);
 });
 
 module.exports = router;
