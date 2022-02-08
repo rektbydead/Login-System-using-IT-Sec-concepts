@@ -5,7 +5,7 @@ const sql = require('../sql');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    let body = body;
+    let body = req.body;
 
     if (!Object.keys(body).length) {
         return res.send("Empty body");   
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    await sql.addUser(body.username, body.email, body.password, salt);
+    await sql.addUser(body.username, body.email, hashedPassword, salt);
 
     res.send(hashedPassword);
 });
