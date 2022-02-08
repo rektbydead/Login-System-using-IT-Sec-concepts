@@ -1,6 +1,6 @@
 const encrypt = require('../encrypt');
 const express = require('express');
-const sql = require('../sql');
+const sql = require('../utils/sql');
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const sql = require('./sql');
+const sql = require('./utils/sql');
 
 const app = express();
 const port = 3000;
