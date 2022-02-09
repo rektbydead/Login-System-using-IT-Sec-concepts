@@ -24,6 +24,7 @@ router.post('/', async (req, res) => {
     if (!inputChecker.checkEmail(email)) return res.status(400).send(constants.EMAIL_IS_NOT_VALID);
     if (await sql.checkUserExists(email)) return res.status(400).send(constants.EMAIL_ALREADY_EXITS);
 
+    // Password check
     let passwordCheck = inputChecker.checkPassword(password, username);
     if (passwordCheck) return res.status(400).send(passwordCheck);
 
@@ -33,6 +34,8 @@ router.post('/', async (req, res) => {
 
     // Add user and report success
     sql.addUser(username, email, hashedPassword, salt);
+
+    // Report success
     res.status(200).send(constants.USER_ADD_SUCCESS);
 });
 
