@@ -28,7 +28,7 @@ router.delete('/', async function(req, res) {
     // Verify password is correct
     if (!encrypt.verifyPassword(result.password, password, result.salt)) return res.send(constants.EMAIL_PASSWORD_NOT_CORRECT);
     
-    // Get user information and returns (in this case just returns the username)
+    // Delete user information
     sql.deleteUser(email);
 
     // Report success
