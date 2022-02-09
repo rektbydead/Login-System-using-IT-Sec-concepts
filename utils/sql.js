@@ -87,8 +87,14 @@ const addUser = (username, email, password, salt) => {
     );
 };
 
-const removeUser = () => {
+const deleteUser = (email) => {
+    const deleteUserStatement = `DELETE FROM ${TABLE_NAME} WHERE email=?`;
 
+    connection.query(deleteUserStatement, 
+        [
+            email,
+        ]
+    );
 };
 
 const changeUserPassword = (email, password, salt) => {
@@ -107,7 +113,7 @@ module.exports = {
     createDatabase,
     checkUserExists,
     addUser,
-    removeUser,
+    deleteUser,
     changeUserPassword,
     getLoginInformation,
     getUserInformation,
