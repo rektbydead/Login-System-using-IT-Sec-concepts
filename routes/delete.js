@@ -9,17 +9,17 @@ const router = express.Router();
 router.delete('/', async function(req, res) {
     // Body is empty
     let body = req.body;
-    if (!Object.keys(body).length) return res.send(constants.BODY_IS_MISSING);    
+    if (!Object.keys(body).length) return res.send({status: false, status_msg: constants.BODY_IS_MISSING});    
 
     let email = body.email.toLowerCase();
     let password = body.password;
 
     // Something is missing
-    if (!email) return res.status(400).send(constants.EMAIL_IS_MISSING);
-    if (!password) return res.status(400).send(constants.PASSWORD_IS_MISSING);
+    if (!email) return res.status(400).send({status: false, status_msg: constants.EMAIL_IS_MISSING});
+    if (!password) return res.status(400).send({status: false, status_msg: constants.PASSWORD_IS_MISSING});
 
     // Input check
-    if (!inputChecker.checkEmail(email)) return res.status(400).send(constants.EMAIL_IS_NOT_VALID);
+    if (!inputChecker.checkEmail(email)) return res.status(400).send({status: false, status_msg: constants.EMAIL_IS_NOT_VALID});
 
     // User does not exists
     let result = await sql.getLoginInformation(email);

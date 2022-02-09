@@ -8,30 +8,31 @@ const router = express.Router();
 router.put('/', async function(req, res) {
     // Body is empty
     let body = req.body;
-    if (!Object.keys(body).length) return res.send(constants.BODY_IS_MISSING);    
+    if (!Object.keys(body).length) return res.send({status: false, status_msg: constants.BODY_IS_MISSING});    
 
     let email = body.email.toLowerCase();
     let password = body.password;
     let newPassword = body.new_password;
 
     // Something is missing
-    if (!email) return res.status(400).send(constants.EMAIL_IS_MISSING);
-    if (!password) return res.status(400).send(constants.PASSWORD_IS_MISSING);
-    if (!newPassword) return res.status(400).send(constants.NEW_PASSWORD_IS_MISSING);
+    // Something is missing
+    if (!email) return res.status(400).send({status: false, status_msg: constants.EMAIL_IS_MISSING});
+    if (!password) return res.status(400).send({status: false, status_msg: constants.PASSWORD_IS_MISSING});
+    if (!newPassword) return res.status(400).send({status: false, status_msg: constants.NEW_PASSWORD_IS_MISSING});
 
     // Input check
-    if (!inputChecker.checkEmail(email)) return res.status(400).send(constants.EMAIL_IS_NOT_VALID);
+    if (!inputChecker.checkEmail(email)) return res.status(400).send({status: false, status_msg: constants.EMAIL_IS_NOT_VALID});
 
     // Check Password
     let passwordCheck = inputChecker.checkPassword(newPassword, username);
-    if (passwordCheck) return res.status(400).send(passwordCheck);
+    if (passwordCheck) return res.status(400).send({status: false, status_msg: passwordCheck});
 
     // User does not exists
     let result = await sql.getLoginInformation(email);
-    if (!result) return res.send(constants.EMAIL_PASSWORD_NOT_CORRECT);
+    if (!result) return res.send({status: false, status_msg: constants.EMAIL_PASSWORD_NOT_CORRECT});
 
     // Verify password is correct
-    if (!encrypt.verifyPassword(result.password, password, result.salt)) return res.send(constants.EMAIL_PASSWORD_NOT_CORRECT);
+    if (!encrypt.verifyPassword(result.password, password, result.salt)) return res.send({status: false, status_msg: constants.EMAIL_PASSWORD_NOT_CORRECT});
 
     // Create new Salt password
     let salt = encrypt.createSalt();
@@ -41,7 +42,7 @@ router.put('/', async function(req, res) {
     sql.changeUserPassword(email, hashedPassword, salt);
 
     // Report success
-    res.status(200).send(constants.PASSWORD_CHANGE_SUCCESS);
+    return res.status(200).send({status: true, status_msg: constants.PASSWORD_CHANGE_SUCCESS});
 });
 
 
