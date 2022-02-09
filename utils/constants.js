@@ -11,6 +11,7 @@ module.exports = {
     NEW_PASSWORD_IS_MISSING: "New password is missing",
     EMAIL_IS_MISSING: "Email is missing",
     USERNAME_IS_MISSING: "User name is missing",
+    BODY_IS_MISSING: "Body is missing",
 
     PASSWORD_TOO_SMALL: "Password has less than 8 characters",
     PASSWORD_HAS_NO_DIGIT: "Password has to have at least one digit",

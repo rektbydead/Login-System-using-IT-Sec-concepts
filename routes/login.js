@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/', async function(req, res) {
     // Body is empty
     let body = req.body;
-    if (!Object.keys(body).length) return res.send("Empty body");    
+    if (!Object.keys(body).length) return res.send(constants.BODY_IS_MISSING);    
 
     let email = body.email.toLowerCase();
     let password = body.password;

@@ -8,7 +8,7 @@ const router = express.Router();
 router.put('/', async function(req, res) {
     // Body is empty
     let body = req.body;
-    if (!Object.keys(body).length) return res.send("Empty body");    
+    if (!Object.keys(body).length) return res.send(constants.BODY_IS_MISSING);    
 
     let email = body.email.toLowerCase();
     let password = body.password;
@@ -38,7 +38,7 @@ router.put('/', async function(req, res) {
     let hashedPassword = encrypt.hashPassword(password, salt);
     
     // Update value in database
-    await sql.changeUserPassword(email, hashedPassword, salt);
+    sql.changeUserPassword(email, hashedPassword, salt);
 
     // Report success
     res.status(200).send(constants.PASSWORD_CHANGE_SUCCESS);
