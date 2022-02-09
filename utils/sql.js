@@ -55,7 +55,7 @@ const getLoginInformation = (email) => {
             }
         );
     });
-}
+};
 
 const getUserInformation = (email) => {
     const userExistsStatement = `Select ${NAME} from ${TABLE_NAME} where ${EMAIL}=?`;
@@ -72,25 +72,35 @@ const getUserInformation = (email) => {
             }
         );
     });
-}
+};
 
 const addUser = (username, email, password, salt) => {
     const addUserStatement = `INSERT INTO ${TABLE_NAME} VALUES (?, ?, ?, ?)`;
 
-    connection.query(addUserStatement, [
-        username,
-        email,
-        password,
-        salt
-    ]);
+    connection.query(addUserStatement, 
+        [
+            username,
+            email,
+            password,
+            salt
+        ]
+    );
 };
 
 const removeUser = () => {
 
 };
 
-const changeUserPassword = () => {
+const changeUserPassword = (email, password, salt) => {
+    const addUserStatement = `UPDATE ${TABLE_NAME} SET ${PASSWORD}=?, ${SALT}=? WHERE email=?`;
 
+    connection.query(addUserStatement, 
+        [
+            password,
+            salt,
+            email
+        ]
+    );
 };
 
 module.exports = {
