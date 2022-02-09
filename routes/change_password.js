@@ -38,7 +38,9 @@ router.put('/', async function(req, res) {
     let hashedPassword = encrypt.hashPassword(password, salt);
     
     // Update value in database
+    await sql.changeUserPassword(email, hashedPassword, salt);
 
+    // Report success
     res.status(200).send(constants.USER_ADD_SUCCESS);
 });
 
