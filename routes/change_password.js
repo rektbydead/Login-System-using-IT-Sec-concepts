@@ -26,7 +26,7 @@ router.put('/', async function(req, res) {
     let passwordCheck = inputChecker.checkPassword(newPassword, username);
     if (passwordCheck) return res.status(400).send({status: false, status_msg: passwordCheck});
 
-    // Get user info, return if user does not exists
+    // Get user login info, return if user does not exists
     let result = await sql.getLoginInformation(email);
     if (!result) return res.send({status: false, status_msg: constants.EMAIL_PASSWORD_NOT_CORRECT});
 

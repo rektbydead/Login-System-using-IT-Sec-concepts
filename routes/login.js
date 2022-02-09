@@ -21,7 +21,7 @@ router.get('/', async function(req, res) {
     // Input check
     if (!inputChecker.checkEmail(email)) return res.status(400).send({status: false, status_msg: constants.EMAIL_IS_NOT_VALID});
 
-    // Get user info, return if user does not exists
+    // Get user login info, return if user does not exists
     let result = await sql.getLoginInformation(email);
     if (!result) return res.send({status: false, status_msg: constants.EMAIL_PASSWORD_NOT_CORRECT});
 
