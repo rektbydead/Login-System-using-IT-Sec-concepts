@@ -27,6 +27,7 @@ module.exports = {
     USER_ADD_SUCCESS: "User added successfully",
     PASSWORD_CHANGE_SUCCESS: "Password changes successfully",
     LOGIN_SUCCESS: "Login successfully completed",
+    DELETE_SUCCESS: "Deleted user successfully",
 
     // encrypto constants
     ITERATIONS: 1000,

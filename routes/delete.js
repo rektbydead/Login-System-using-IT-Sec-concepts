@@ -32,7 +32,7 @@ router.delete('/', async function(req, res) {
     sql.deleteUser(email);
 
     // Report success
-    return res.status(200).send({info: userInformation, msg: constants.LOGIN_SUCCESS});
+    return res.status(200).send({info: userInformation, msg: constants.DELETE_SUCCESS});
 });
 
 module.exports = router;
