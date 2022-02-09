@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
     let salt = encrypt.createSalt();
     let hashedPassword = encrypt.hashPassword(password, salt);
 
-    // Add user and report success
+    // Add user
     sql.addUser(username, email, hashedPassword, salt);
 
     // Report success

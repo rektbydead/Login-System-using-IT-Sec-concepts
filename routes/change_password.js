@@ -27,7 +27,7 @@ router.put('/', async function(req, res) {
     let passwordCheck = inputChecker.checkPassword(newPassword, username);
     if (passwordCheck) return res.status(400).send({status: false, status_msg: passwordCheck});
 
-    // User does not exists
+    // Get user info, return if user does not exists
     let result = await sql.getLoginInformation(email);
     if (!result) return res.send({status: false, status_msg: constants.EMAIL_PASSWORD_NOT_CORRECT});
 
@@ -38,7 +38,7 @@ router.put('/', async function(req, res) {
     let salt = encrypt.createSalt();
     let hashedPassword = encrypt.hashPassword(password, salt);
     
-    // Update value in database
+    // Update password and salt in database
     sql.changeUserPassword(email, hashedPassword, salt);
 
     // Report success
