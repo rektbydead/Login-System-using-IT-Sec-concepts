@@ -8,6 +8,7 @@ module.exports = {
     
     // error constants
     PASSWORD_IS_MISSING: "Password is missing",
+    NEW_PASSWORD_IS_MISSING: "New password is missing",
     EMAIL_IS_MISSING: "Email is missing",
     USERNAME_IS_MISSING: "User name is missing",
 
