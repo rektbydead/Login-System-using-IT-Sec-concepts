@@ -41,7 +41,7 @@ router.put('/', async function(req, res) {
     await sql.changeUserPassword(email, hashedPassword, salt);
 
     // Report success
-    res.status(200).send(constants.USER_ADD_SUCCESS);
+    res.status(200).send(constants.PASSWORD_CHANGE_SUCCESS);
 });
 
 

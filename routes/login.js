@@ -32,7 +32,7 @@ router.get('/', async function(req, res) {
     let userInformation = await sql.getUserInformation(email);
 
     // Report success
-    return res.status(200).send(userInformation);
+    return res.status(200).send({info: userInformation, msg: constants.LOGIN_SUCCESS});
 });
 
 module.exports = router;
