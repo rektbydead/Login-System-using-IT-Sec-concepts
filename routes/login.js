@@ -25,13 +25,13 @@ router.get('/', async function(req, res) {
     let result = await sql.getLoginInformation(email);
     if (!result) return res.send({status: false, status_msg: constants.EMAIL_PASSWORD_NOT_CORRECT});
 
-    // Verify password is correct
+    // Verify if password is correct
     if (!encrypt.verifyPassword(result.password, password, result.salt)) return res.send({status: false, status_msg: constants.EMAIL_PASSWORD_NOT_CORRECT});
     
-    // Get user information and returns (in this case just returns the username, this would make sense if there were more information from other tables or smth)
+    // Get user information from database
     let userInformation = await sql.getUserInformation(email);
 
-    // Report success
+    // Report success and success userInformation
     return res.status(200).send({status: true, status_msg: constants.LOGIN_SUCCESS, info: userInformation});
 });
 

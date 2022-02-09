@@ -21,14 +21,14 @@ router.delete('/', async function(req, res) {
     // Input check
     if (!inputChecker.checkEmail(email)) return res.status(400).send({status: false, status_msg: constants.EMAIL_IS_NOT_VALID});
 
-    // User does not exists
+    // Get user login info, return if user does not exists
     let result = await sql.getLoginInformation(email);
     if (!result) return res.send(constants.EMAIL_PASSWORD_NOT_CORRECT);
 
-    // Verify password is correct
+    // Verify if password is correct
     if (!encrypt.verifyPassword(result.password, password, result.salt)) return res.send(constants.EMAIL_PASSWORD_NOT_CORRECT);
     
-    // Delete user information
+    // Delete user information from database
     sql.deleteUser(email);
 
     // Report success

@@ -22,9 +22,11 @@ router.post('/', async (req, res) => {
 
     // Input check
     if (!inputChecker.checkEmail(email)) return res.status(400).send({status: false, status_msg: constants.EMAIL_IS_NOT_VALID});
+
+    // Check if email already exists
     if (await sql.checkUserExists(email)) return res.status(400).send({status: false, status_msg: constants.EMAIL_ALREADY_EXITS});
 
-    // Password check
+    // Check if password is good enough
     let passwordCheck = inputChecker.checkPassword(password, username);
     if (passwordCheck) return res.status(400).send({status: false, status_msg: passwordCheck});
 
@@ -32,7 +34,7 @@ router.post('/', async (req, res) => {
     let salt = encrypt.createSalt();
     let hashedPassword = encrypt.hashPassword(password, salt);
 
-    // Add user
+    // Add user to database
     sql.addUser(username, email, hashedPassword, salt);
 
     // Report success

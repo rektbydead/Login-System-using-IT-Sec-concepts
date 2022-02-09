@@ -15,15 +15,14 @@ router.put('/', async function(req, res) {
     let newPassword = body.new_password;
 
     // Something is missing
-    // Something is missing
     if (!email) return res.status(400).send({status: false, status_msg: constants.EMAIL_IS_MISSING});
     if (!password) return res.status(400).send({status: false, status_msg: constants.PASSWORD_IS_MISSING});
     if (!newPassword) return res.status(400).send({status: false, status_msg: constants.NEW_PASSWORD_IS_MISSING});
 
-    // Input check
+    // Input check 
     if (!inputChecker.checkEmail(email)) return res.status(400).send({status: false, status_msg: constants.EMAIL_IS_NOT_VALID});
 
-    // Check Password
+    // Check if new password is good enough
     let passwordCheck = inputChecker.checkPassword(newPassword, username);
     if (passwordCheck) return res.status(400).send({status: false, status_msg: passwordCheck});
 
@@ -31,10 +30,10 @@ router.put('/', async function(req, res) {
     let result = await sql.getLoginInformation(email);
     if (!result) return res.send({status: false, status_msg: constants.EMAIL_PASSWORD_NOT_CORRECT});
 
-    // Verify password is correct
+    // Verify if old password is correct
     if (!encrypt.verifyPassword(result.password, password, result.salt)) return res.send({status: false, status_msg: constants.EMAIL_PASSWORD_NOT_CORRECT});
 
-    // Create new Salt password
+    // Create new Salt password and encrypt password
     let salt = encrypt.createSalt();
     let hashedPassword = encrypt.hashPassword(password, salt);
     
