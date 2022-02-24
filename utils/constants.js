@@ -30,7 +30,7 @@ module.exports = {
     DELETE_SUCCESS: "Deleted user successfully",
 
     // encrypto constants
-    ITERATIONS: 1000,
+    ITERATIONS: 100000,
     LENGTH: 64,
     ALGORITHM: 'sha512'
 }
