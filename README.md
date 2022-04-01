@@ -40,7 +40,7 @@ Example of Salt Usage:
     Example 1:
     Randomly generated salt: 3eeb9bed9148d82ea780534f59689356fe9
     Plain text: ThisIsNowAPassword + 3eeb9bed9148d82ea780534f59689356fe9 = ThisIsNowAPassword3eeb9bed9148d82ea780534f59689356fe9
-    Hashed values: ec7113511cbdf82304492eb864b978cf52f9ab35b94292f1f87118a241299db47a3047e09e7cc3d8b3ceeccb86823f863e96207fa8543d0c1fe391de759eb73f~
+    Hashed values: ec7113511cbdf82304492eb864b978cf52f9ab35b94292f1f87118a241299db47a3047e09e7cc3d8b3ceeccb86823f863e96207fa8543d0c1fe391de759eb73f
 
     Example 2:
     Randomly generated salt: 8191e8a8bb8b125020
