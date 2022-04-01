@@ -12,11 +12,8 @@ Hashing is the process of converting a given key (for example, a password) to a 
 
 Example using SHA-512:
 
-Plain text: ThisIsNowAPassword
-Hashed Value: d393f49203106342ba64025ca8959737cc96e596ade79909cd8b74c6816170c8172d3422d114cfe8c528e9f934800db43c0c19c423227a5ca516de5f230d27a8
-
-
-
+    Plain text: ThisIsNowAPassword
+    Hashed Value: d393f49203106342ba64025ca8959737cc96e596ade79909cd8b74c6816170c8172d3422d114cfe8c528e9f934800db43c0c19c423227a5ca516de5f230d27a8
 
 > #### Multiple Hashing
 
