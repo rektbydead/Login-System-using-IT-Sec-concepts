@@ -6,11 +6,11 @@ Neste projeto serão demonstrados conceitos relacionados com password-saving, ta
 
 ## Concepts
 
-#### > Hashing
+> #### Hashing
 
-#### > Multiple Hashing
+> #### Multiple Hashing
 
-#### > Salt
+> #### Salt
 
-#### > Peeper
+> #### Peeper
 
