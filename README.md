@@ -1,6 +1,6 @@
 # Login-System
 
-A simple login/register API with the objective of demonstrate some It-Security concepts. This projects does not prove any OAuth or JWT concepts (I might do later a project proving this concepts).
+A simple login/register API with the objective of demonstrating some It-Security concepts. This projects does not prove any OAuth or JWT concepts (I might do later a project proving this concepts).
 
 In this project, concepts related to passwords will be demonstrated, such as "Hashing", "Key stretching", "Salt" and "Peeper". Some of these concepts help prevent/delay bruteforcing and further damage in case the database is leaked.
 
