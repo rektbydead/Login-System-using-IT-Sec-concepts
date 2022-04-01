@@ -6,7 +6,7 @@ Neste projeto serão demonstrados conceitos relacionados com password-saving, ta
 
 ## Concepts
 
-#### Hashing
+> #### Hashing
 
 Hashing is the process of converting a given key (for example, a password) to a totally different value that is unreadable. This convertion is done by using mathematical hashing algorithms like SHA-512.
 
