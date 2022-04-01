@@ -36,7 +36,16 @@ Example of Salt Usage:
 
     Plain text: ThisIsNowAPassword
     Hashed value (no salt): d393f49203106342ba64025ca8959737cc96e596ade79909cd8b74c6816170c8172d3422d114cfe8c528e9f934800db43c0c19c423227a5ca516de5f230d27a8
-    Hashed value (with salt): C54DD87E42B34252C894CBD96C93861812CD15B884A149090330DE87BF0A458A21A856383AC3E799E0596D915814B8F4A0B25DB69539315EFC36CD6B710B770A
+
+    Example 1:
+    Randomly generated salt: 3eeb9bed9148d82ea780534f59689356fe9
+    Plain text: ThisIsNowAPassword + 3eeb9bed9148d82ea780534f59689356fe9 = ThisIsNowAPassword3eeb9bed9148d82ea780534f59689356fe9
+    Hashed values: ec7113511cbdf82304492eb864b978cf52f9ab35b94292f1f87118a241299db47a3047e09e7cc3d8b3ceeccb86823f863e96207fa8543d0c1fe391de759eb73f~
+
+    Example 2:
+    Randomly generated salt: 8191e8a8bb8b125020
+    Plain text: ThisIsNowAPassword + 8191e8a8bb8b125020 = ThisIsNowAPassword8191e8a8bb8b125020
+    Hashed values: 32603942af52bb8de9d223cf429571f6616dbed7db69a6c679b429d81522abc6fadafbee8a74668c6e63eb90132fcbe31b7bae762ea4bb87bff03af8a44a24f1
 
 > #### Peeper
 
